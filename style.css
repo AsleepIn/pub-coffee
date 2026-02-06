@@ -1,0 +1,314 @@
+/* ==============================================
+   Variáveis (cores e tamanhos reutilizáveis)
+   ============================================== */
+:root {
+  --bege: #f2e6d8;
+  --bege-escuro: #e2d1bd;
+  --marrom: #6f4e37;
+  --marrom-escuro: #3b2618;
+  --texto: #2a1a10;
+  --branco-suave: #fff8f0;
+  --sombra-suave: 0 10px 30px rgba(0,0,0,0.15);
+  --sombra-forte: 0 14px 40px rgba(0,0,0,0.25);
+  --transicao: all 0.25s ease;
+}
+
+/* Reset básico + global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(180deg, var(--bege), var(--bege-escuro));
+  color: var(--texto);
+  min-height: 100dvh; /* melhor que 100vh em mobile */
+  line-height: 1.5;
+}
+
+/* Header / Topo */
+.topo {
+  padding: 1.5rem;
+  background: linear-gradient(90deg, var(--marrom), var(--marrom-escuro));
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topo h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.topo p {
+  margin: 0.25rem 0 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.btn-cart {
+  background: var(--bege);
+  color: var(--marrom-escuro);
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transicao);
+}
+
+.btn-cart:hover {
+  transform: scale(1.05);
+}
+
+/* Banner */
+.banner {
+  height: 220px; /* reduz um pouco pro mobile */
+  background:
+    linear-gradient(rgba(59,38,24,0.65), rgba(59,38,24,0.65)),
+    url("https://baggiocafe.com.br/cdn/shop/articles/Cafe_gelado_1.png?v=1712149644") center/cover no-repeat;
+  display: grid;
+  place-items: center;
+  border-radius: 0 0 1.5rem 1.5rem;
+}
+
+.banner-text {
+  background: rgba(255, 248, 240, 0.92);
+  padding: 1.2rem 1.8rem;
+  border-radius: 1rem;
+  text-align: center;
+  max-width: 90%;
+}
+
+/* Produtos / Cards */
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--branco-suave);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: var(--sombra-suave);
+  transition: var(--transicao);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-forte);
+}
+
+.produto-img {
+  width: 100%;
+  height: 160px; /* fixo pra evitar CLS */
+  object-fit: cover;
+  border-radius: 0.8rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.preco {
+  display: block;
+  font-weight: 800;
+  color: var(--marrom);
+  margin: 0.5rem 0 0.8rem;
+  font-size: 1.15rem;
+}
+
+.card button {
+  width: 100%;
+  background: linear-gradient(90deg, var(--marrom), #9b6b43);
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: var(--transicao);
+}
+
+.card button:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+}
+
+/* Modal Carrinho */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  overflow-y: auto; /* permite scroll se conteúdo for grande */
+  padding: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  width: min(94vw, 440px);
+  background: var(--branco-suave);
+  border-radius: 1.2rem;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.cart-list {
+  list-style: none;
+  margin: 1rem 0 1.2rem;
+}
+
+.cart-list li {
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.18);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total {
+  font-size: 1.2rem;
+  text-align: right;
+  margin: 1rem 0;
+}
+
+.pix-box {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.pix-img {
+  width: 100%;
+  max-width: 220px;
+  background: white;
+  padding: 0.6rem;
+  border-radius: 1rem;
+  margin: 0.8rem auto;
+  display: block;
+}
+
+.actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.actions button,
+.actions .whats {
+  flex: 1;
+  padding: 0.9rem;
+  border-radius: 0.8rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+
+.actions button {
+  background: #ddd;
+  color: #333;
+}
+
+.actions .whats {
+  background: #25d366;
+  color: white;
+}
+
+/* WhatsApp flutuante */
+.whatsapp-float {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 60px;
+  height: 60px;
+  background: #25d366;
+  color: white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  box-shadow: var(--sombra-forte);
+  z-index: 9999;
+  transition: var(--transicao);
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+/* Rodapé */
+.rodape {
+  text-align: center;
+  padding: 1.5rem;
+  opacity: 0.75;
+  font-size: 0.9rem;
+}
+
+/* ==============================================
+   Media Queries - Progressive enhancement (mobile-first)
+   ============================================== */
+
+/* Tablets e acima (~768px+) */
+@media (min-width: 768px) {
+  .topo {
+    padding: 1.8rem 3rem;
+  }
+
+  .banner {
+    height: 300px;
+  }
+
+  .banner-text {
+    padding: 1.8rem 2.5rem;
+    max-width: 70%;
+  }
+
+  .produtos {
+    padding: 2.5rem;
+    gap: 1.8rem;
+  }
+
+  .produto-img {
+    height: 180px;
+  }
+
+  .modal-content {
+    width: min(90vw, 500px);
+  }
+}
+
+/* Desktops grandes (~1024px+) */
+@media (min-width: 1024px) {
+  .topo {
+    padding: 2rem 5rem;
+  }
+
+  .banner {
+    height: 380px;
+  }
+
+  .produtos {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
